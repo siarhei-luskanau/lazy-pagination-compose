@@ -37,6 +37,9 @@ class PaginatedLazyVerticalGridTest : PaginatedLazyScrollableTest() {
                     Text(it.message.toString())
                 }
             },
+            firstPageEmptyIndicator = {
+                Box(modifier = Modifier.testTag(FIRST_PAGE_EMPTY_INDICATOR_TAG))
+            },
             columns = GridCells.Fixed(3),
         ) {
             itemsIndexed(
@@ -64,6 +67,10 @@ class PaginatedLazyVerticalGridTest : PaginatedLazyScrollableTest() {
     @Test
     override fun firstPageErrorIsShownWhenNoPageAndErrorHappened() =
         super.firstPageErrorIsShownWhenNoPageAndErrorHappened()
+
+    @Test
+    override fun firstPageEmptyIsShownWhenLoadedAndPageIsEmpty() =
+        super.firstPageEmptyIsShownWhenLoadedAndPageIsEmpty()
 
     @Test
     override fun firstPageIsShownWhenPutPageIsTriggeredForTheFirstTime() =
