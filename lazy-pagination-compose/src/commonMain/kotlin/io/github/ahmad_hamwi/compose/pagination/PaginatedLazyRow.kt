@@ -22,6 +22,7 @@ fun <KEY, T> PaginatedLazyRow(
     newPageProgressIndicator: @Composable () -> Unit = {},
     firstPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
     newPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
+    firstPageEmptyIndicator: @Composable () -> Unit = {},
     state: LazyListState = rememberLazyListState(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     reverseLayout: Boolean = false,
@@ -38,6 +39,7 @@ fun <KEY, T> PaginatedLazyRow(
         newPageProgressIndicator,
         firstPageErrorIndicator,
         newPageErrorIndicator,
+        firstPageEmptyIndicator,
         state,
     ) { paginatedItemsHandler ->
         LazyRow(

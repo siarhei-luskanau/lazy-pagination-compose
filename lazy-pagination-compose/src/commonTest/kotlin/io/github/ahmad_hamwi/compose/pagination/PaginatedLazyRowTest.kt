@@ -36,7 +36,10 @@ class PaginatedLazyRowTest : PaginatedLazyScrollableTest() {
                 Box(modifier = Modifier.testTag(NEW_PAGE_ERROR_INDICATOR_TAG)) {
                     Text(it.message.toString())
                 }
-            }
+            },
+            firstPageEmptyIndicator = {
+                Box(modifier = Modifier.testTag(FIRST_PAGE_EMPTY_INDICATOR_TAG))
+            },
         ) {
             itemsIndexed(
                 items = paginationState.allItems!!,
@@ -63,6 +66,10 @@ class PaginatedLazyRowTest : PaginatedLazyScrollableTest() {
     @Test
     override fun firstPageErrorIsShownWhenNoPageAndErrorHappened() =
         super.firstPageErrorIsShownWhenNoPageAndErrorHappened()
+
+    @Test
+    override fun firstPageEmptyIsShownWhenLoadedAndPageIsEmpty() =
+        super.firstPageEmptyIsShownWhenLoadedAndPageIsEmpty()
 
     @Test
     override fun firstPageIsShownWhenPutPageIsTriggeredForTheFirstTime() =

@@ -30,6 +30,7 @@ internal fun <KEY, T, LAZY_STATE, LAZY_SCROLLABLE_SCOPE> PaginatedLazyScrollable
     newPageProgressIndicator: @Composable () -> Unit = {},
     firstPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
     newPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
+    firstPageEmptyIndicator: @Composable () -> Unit = {},
     state: LAZY_STATE,
     concreteLazyList: LazyScrollable<LAZY_SCROLLABLE_SCOPE>,
 ) {
@@ -45,6 +46,10 @@ internal fun <KEY, T, LAZY_STATE, LAZY_SCROLLABLE_SCOPE> PaginatedLazyScrollable
 
     if (internalState is PaginationInternalState.Loading && internalState.items == null) {
         firstPageProgressIndicator()
+    }
+
+    if (internalState is PaginationInternalState.Loaded && internalState.items?.isEmpty() == true) {
+        firstPageEmptyIndicator()
     }
 
     if (internalState is PaginationInternalState.Error && internalState.items == null) {

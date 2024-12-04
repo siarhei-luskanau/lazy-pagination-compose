@@ -22,6 +22,7 @@ fun <KEY, T> PaginatedLazyVerticalGrid(
     newPageProgressIndicator: @Composable () -> Unit = {},
     firstPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
     newPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
+    firstPageEmptyIndicator: @Composable () -> Unit = {},
     state: LazyGridState = rememberLazyGridState(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     reverseLayout: Boolean = false,
@@ -39,6 +40,7 @@ fun <KEY, T> PaginatedLazyVerticalGrid(
         newPageProgressIndicator,
         firstPageErrorIndicator,
         newPageErrorIndicator,
+        firstPageEmptyIndicator,
         state,
     ) { paginatedItemsHandler ->
         LazyVerticalGrid(

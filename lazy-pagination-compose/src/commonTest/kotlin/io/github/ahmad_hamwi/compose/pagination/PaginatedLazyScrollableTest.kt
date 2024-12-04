@@ -17,6 +17,7 @@ abstract class PaginatedLazyScrollableTest {
         const val LAZY_SCROLLABLE_TAG = "lazyScrollable"
         const val FIRST_PAGE_PROGRESS_INDICATOR_TAG = "firstPageProgressIndicator"
         const val FIRST_PAGE_ERROR_INDICATOR_TAG = "firstPageErrorIndicator"
+        const val FIRST_PAGE_EMPTY_INDICATOR_TAG = "firstPageEmptyIndicator"
         const val ITEM_CONTENT_TAG = "itemContent"
         const val NEW_PAGE_PROGRESS_INDICATOR_TAG = "newPageProgressIndicator"
         const val NEW_PAGE_ERROR_INDICATOR_TAG = "newPageErrorIndicator"
@@ -75,6 +76,22 @@ abstract class PaginatedLazyScrollableTest {
 
         onNodeWithTag(FIRST_PAGE_ERROR_INDICATOR_TAG).assertExists()
         onNodeWithText("First page error").assertExists()
+        assertThat(pageKeysCalled).isEqualTo(listOf(1))
+    }
+
+    open fun firstPageEmptyIsShownWhenLoadedAndPageIsEmpty() = runComposeUiTest {
+        val pageKeysCalled = mutableListOf<Int>()
+        val state = defaultPaginationState { pageKey ->
+            pageKeysCalled += pageKey
+        }
+
+        setContent {
+            SutComposable(paginationState = state)
+        }
+
+        state.appendPage(items = listOf(), nextPageKey = 2, isLastPage = true)
+
+        onNodeWithTag(FIRST_PAGE_EMPTY_INDICATOR_TAG).assertExists()
         assertThat(pageKeysCalled).isEqualTo(listOf(1))
     }
 
@@ -263,4 +280,6 @@ abstract class PaginatedLazyScrollableTest {
 
         assertThat(pageKeyCalled).isEqualTo(3)
     }
+
+
 }

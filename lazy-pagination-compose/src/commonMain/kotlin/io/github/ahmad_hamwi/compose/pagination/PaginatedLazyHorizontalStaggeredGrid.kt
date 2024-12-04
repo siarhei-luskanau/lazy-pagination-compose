@@ -23,6 +23,7 @@ fun <KEY, T> PaginatedLazyHorizontalStaggeredGrid(
     newPageProgressIndicator: @Composable () -> Unit = {},
     firstPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
     newPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
+    firstPageEmptyIndicator: @Composable () -> Unit = {},
     state: LazyStaggeredGridState = rememberLazyStaggeredGridState(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     reverseLayout: Boolean = false,
@@ -39,6 +40,7 @@ fun <KEY, T> PaginatedLazyHorizontalStaggeredGrid(
         newPageProgressIndicator,
         firstPageErrorIndicator,
         newPageErrorIndicator,
+        firstPageEmptyIndicator,
         state,
     ) { paginatedItemsHandler ->
         LazyHorizontalStaggeredGrid(
