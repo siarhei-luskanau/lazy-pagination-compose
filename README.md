@@ -64,6 +64,7 @@ PaginatedLazyColumn(
         ... onRetry = { paginationState.retryLastFailedRequest() } ...
     },
     newPageErrorIndicator = { e -> ... },
+    firstPageEmptyIndicator = { ... },
     // The rest of LazyColumn params
 ) {
     itemsIndexed(
@@ -99,6 +100,7 @@ PaginatedLazyRow(
         ... onRetry = { paginationState.retryLastFailedRequest() } ...
     },
     newPageErrorIndicator = { e -> ... },
+    firstPageEmptyIndicator = { ... },
     ... // The rest of LazyRow params
 ) {
     itemsIndexed(
@@ -134,6 +136,7 @@ PaginatedLazyVerticalGrid(
         ... onRetry = { paginationState.retryLastFailedRequest() } ...
     },
     newPageErrorIndicator = { e -> ... },
+    firstPageEmptyIndicator = { ... },
     ... // The rest of LazyVerticalGrid params
 ) {
     itemsIndexed(
@@ -169,6 +172,7 @@ PaginatedLazyHorizontalGrid(
         ... onRetry = { paginationState.retryLastFailedRequest() } ...
     },
     newPageErrorIndicator = { e -> ... },
+    firstPageEmptyIndicator = { ... },
     ... // The rest of LazyHorizontalGrid params
 ) {
     itemsIndexed(
@@ -382,6 +386,7 @@ fun Content() {
         newPageProgressIndicator = { ... },
         firstPageErrorIndicator = { e -> ... },
         newPageErrorIndicator = { e -> ... },
+        firstPageEmptyIndicator = { ... },
     ) {
         itemsIndexed(
             paginationState.allItems!!, // safe to access here
