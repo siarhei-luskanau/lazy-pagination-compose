@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,7 +14,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import data.DataSource
 import io.github.ahmad_hamwi.compose.pagination.PaginatedLazyColumn
@@ -49,16 +48,14 @@ fun PaginatedLazyColumnSampleContent(modifier: Modifier = Modifier) {
 
     val pullToRefreshState = rememberPullToRefreshState()
 
-    if (pullToRefreshState.isRefreshing) {
+    if (pullToRefreshState.isAnimating) {
         LaunchedEffect(true) {
             paginationState.refresh()
-            pullToRefreshState.endRefresh()
+            pullToRefreshState.animateToHidden()
         }
     }
 
-    Box(
-        modifier = modifier.nestedScroll(pullToRefreshState.nestedScrollConnection)
-    ) {
+    Box {
         PaginatedLazyColumn(
             modifier = modifier,
             paginationState = paginationState,
@@ -96,11 +93,13 @@ fun PaginatedLazyColumnSampleContent(modifier: Modifier = Modifier) {
             }
         }
 
-        if (pullToRefreshState.progress > 0) {
-            PullToRefreshContainer(
+        if (pullToRefreshState.distanceFraction > 0) {
+            PullToRefreshBox(
+                isRefreshing = true,
                 state = pullToRefreshState,
-                modifier = Modifier.align(Alignment.TopCenter)
-            )
+                modifier = Modifier.align(Alignment.TopCenter),
+                onRefresh = {}
+            ) {}
         }
     }
 }
