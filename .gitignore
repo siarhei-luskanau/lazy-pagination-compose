@@ -3,6 +3,7 @@
 .gradle
 **/build/
 xcuserdata
+yarn.lock
 !src/**/build/
 local.properties
 .idea
