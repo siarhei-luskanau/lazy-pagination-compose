@@ -412,6 +412,7 @@ This library is made to help other developers out in their app developments, fee
 # Honorable Mentions #
 Thank you for the following contributors:
 - [Tomislav Mladenov](https://github.com/TomislavMladenov): For adding support to the JS target.
+- [Siarhei Luskanau](https://github.com/siarhei-luskanau): For keeping project dependencies up-to-date!
 
 # Support #
 You can show support by either contributing to the repository or by buying me a cup of coffee!
