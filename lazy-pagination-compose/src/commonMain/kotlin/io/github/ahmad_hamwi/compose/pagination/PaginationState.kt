@@ -85,11 +85,11 @@ class PaginationState<KEY, T>(
     fun retryLastFailedRequest() {
         val internalStateSnapshot = internalState.value
 
-        require(internalStateSnapshot is PaginationInternalState.Error) {
-            "retryLastFailedRequest is invoked while there were no errors has been set using setError"
+        require(internalStateSnapshot is PaginationInternalState.Error || internalStateSnapshot is PaginationInternalState.Loading) {
+            "retryLastFailedRequest cannot be invoked while on a state other than error or loading. Current state: $internalStateSnapshot"
         }
 
-        internalState.value = PaginationInternalState.Loading(
+        requestPage(
             initialPageKey = internalStateSnapshot.initialPageKey,
             requestedPageKey = internalStateSnapshot.requestedPageKey,
             items = internalStateSnapshot.items
@@ -100,6 +100,24 @@ class PaginationState<KEY, T>(
         internalState.value = PaginationInternalState.Initial(
             initialPageKey ?: internalState.value.initialPageKey
         )
+    }
+
+    internal fun requestPage(
+        initialPageKey: KEY,
+        requestedPageKey: KEY,
+        items: List<T>? = null,
+    ) {
+        if (internalState.value is PaginationInternalState.Loading) {
+            return
+        }
+
+        internalState.value = PaginationInternalState.Loading(
+            initialPageKey = initialPageKey,
+            requestedPageKey = requestedPageKey ?: initialPageKey,
+            items = items
+        )
+
+        onRequestPage(requestedPageKey ?: initialPageKey)
     }
 }
 

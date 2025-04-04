@@ -36,14 +36,6 @@ internal fun <KEY, T, LAZY_STATE, LAZY_SCROLLABLE_SCOPE> PaginatedLazyScrollable
 ) {
     var internalState by paginationState.internalState
 
-    LaunchedEffect(internalState) {
-        (internalState as? PaginationInternalState.Loading)?.also {
-            paginationState.run {
-                onRequestPage.invoke(this, it.requestedPageKey)
-            }
-        }
-    }
-
     if (internalState is PaginationInternalState.Loading && internalState.items == null) {
         firstPageProgressIndicator()
     }
@@ -99,7 +91,7 @@ internal fun <KEY, T, LAZY_STATE, LAZY_SCROLLABLE_SCOPE> PaginatedLazyScrollable
                     (internalState as? PaginationInternalState.IHasRequestedPageKey<KEY>)?.requestedPageKey
 
                 if (hasReachedLastItem && !isLastPage) {
-                    internalState = PaginationInternalState.Loading(
+                    paginationState.requestPage(
                         initialPageKey = internalState.initialPageKey,
                         requestedPageKey = newlyRequestedPageKey
                             ?: previouslyRequestedPageKey
@@ -152,7 +144,7 @@ internal fun <KEY, T, LAZY_STATE, LAZY_SCROLLABLE_SCOPE> PaginatedLazyScrollable
             val requestedPageKey =
                 (internalState as? PaginationInternalState.IHasRequestedPageKey<KEY>)?.requestedPageKey
 
-            internalState = PaginationInternalState.Loading(
+            paginationState.requestPage(
                 initialPageKey = internalState.initialPageKey,
                 requestedPageKey = requestedPageKey ?: internalState.initialPageKey,
                 items = internalState.items

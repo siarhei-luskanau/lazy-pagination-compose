@@ -33,4 +33,11 @@ internal sealed class PaginationInternalState<KEY, T>(
     interface IHasRequestedPageKey<KEY> {
         val requestedPageKey: KEY
     }
+
+    override fun toString(): String =
+        if (this is Initial) "Initial"
+        else if (this is Loading) "Loading"
+        else if (this is Loaded) "Loaded"
+        else if (this is Error) "Error"
+        else super.toString()
 }
