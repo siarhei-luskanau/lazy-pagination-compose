@@ -93,6 +93,18 @@ class PaginatedLazyHorizontalStaggeredGridTest : PaginatedLazyScrollableTest() {
         super.retryFirstFailedRequestWouldRequestAgainTheSamePageAndShowProgress()
 
     @Test
+    override fun retryingFirstFailedRequestTwiceWouldRequestAgainOnlyOnce() =
+        super.retryingFirstFailedRequestTwiceWouldRequestAgainOnlyOnce()
+
+    @Test
+    override fun failRetrySuccessThenNextPageFailRetrySuccess() =
+        super.failRetrySuccessThenNextPageFailRetrySuccess()
+
+    @Test
+    override fun invokingRetryOnLoadedStateCausesAnIllegalArgumentException() =
+        super.invokingRetryOnLoadedStateCausesAnIllegalArgumentException()
+
+    @Test
     override fun retryNewPageFailedRequestWouldRequestAgainTheSamePageAndShowProgress() =
         super.retryNewPageFailedRequestWouldRequestAgainTheSamePageAndShowProgress()
 
