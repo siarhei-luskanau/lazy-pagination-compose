@@ -40,6 +40,11 @@ class PaginatedLazyHorizontalGridTest : PaginatedLazyScrollableTest() {
             firstPageEmptyIndicator = {
                 Box(modifier = Modifier.testTag(FIRST_PAGE_EMPTY_INDICATOR_TAG))
             },
+            newPageEmptyIndicator = {
+                Box(modifier = Modifier.testTag(NEW_PAGE_EMPTY_INDICATOR_TAG)) {
+                    Text("No more results")
+                }
+            },
             rows = GridCells.Fixed(3),
         ) {
             itemsIndexed(
@@ -83,6 +88,10 @@ class PaginatedLazyHorizontalGridTest : PaginatedLazyScrollableTest() {
     @Test
     override fun scrollingDownTheListWillShowErrorAndTriggerPageRequest() =
         super.scrollingDownTheListWillShowErrorAndTriggerPageRequest()
+
+    @Test
+    override fun scrollingDownTheListWillShowEmptyAndTriggerPageRequest() =
+        super.scrollingDownTheListWillShowEmptyAndTriggerPageRequest()
 
     @Test
     override fun appendingLastPagePreventsLoadingAndNewPageRequests() =

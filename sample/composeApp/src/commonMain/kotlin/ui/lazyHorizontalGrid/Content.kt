@@ -60,6 +60,9 @@ fun PaginatedLazyHorizontalGridSampleContent(modifier: Modifier = Modifier) {
                 }
             )
         },
+        newPageEmptyIndicator = {
+            HorizontalGridItem(value = "No more results")
+        },
         contentPadding = PaddingValues(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),

@@ -31,6 +31,7 @@ internal fun <KEY, T, LAZY_STATE, LAZY_SCROLLABLE_SCOPE> PaginatedLazyScrollable
     firstPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
     newPageErrorIndicator: @Composable (e: Exception) -> Unit = {},
     firstPageEmptyIndicator: @Composable () -> Unit = {},
+    newPageEmptyIndicator: @Composable () -> Unit = {},
     state: LAZY_STATE,
     concreteLazyList: LazyScrollable<LAZY_SCROLLABLE_SCOPE>,
 ) {
@@ -134,6 +135,14 @@ internal fun <KEY, T, LAZY_STATE, LAZY_SCROLLABLE_SCOPE> PaginatedLazyScrollable
                     LazyScrollableKeys.NEW_PAGE_ERROR_INDICATOR_KEY
                 ) {
                     newPageErrorIndicator(internalStateRef.exception)
+                }
+            }
+
+            if (internalStateRef is PaginationInternalState.Loaded && internalStateRef.isLastPage) {
+                item(
+                    LazyScrollableKeys.NEW_PAGE_EMPTY_INDICATOR_KEY
+                ) {
+                    newPageEmptyIndicator()
                 }
             }
         }

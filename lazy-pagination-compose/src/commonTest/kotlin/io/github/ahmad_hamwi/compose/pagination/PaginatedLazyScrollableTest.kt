@@ -148,6 +148,26 @@ abstract class PaginatedLazyScrollableTest {
         assertThat(pageKeysCalled).isEqualTo(listOf(1))
     }
 
+    open fun scrollingDownTheListWillShowEmptyAndTriggerPageRequest() = runComposeUiTest {
+        val pageKeysCalled = mutableListOf<Int>()
+        val state = defaultPaginationState { pageKey ->
+            pageKeysCalled += pageKey
+        }
+
+        setContent { SutComposable(state) }
+
+        state.appendPage(items = listOf("", "", "", "", ""), nextPageKey = 2)
+        onNodeWithTag(LAZY_SCROLLABLE_TAG).performScrollToIndex(4)
+        waitForIdle()
+
+        state.appendPage(items = listOf("", "", "", "", ""), nextPageKey = -1, isLastPage = true)
+        onNodeWithTag(LAZY_SCROLLABLE_TAG).performScrollToIndex(10)
+        waitForIdle()
+
+        onNodeWithTag(NEW_PAGE_EMPTY_INDICATOR_TAG).assertExists()
+        onNodeWithText("No more results").assertExists()
+        assertThat(pageKeysCalled).isEqualTo(listOf(1, 2))
+    }
 
     open fun appendingLastPagePreventsLoadingAndNewPageRequests() = runComposeUiTest {
         val pageKeysCalled = mutableListOf<Int>()
@@ -332,6 +352,4 @@ abstract class PaginatedLazyScrollableTest {
 
         assertThat(pageKeyCalled).isEqualTo(3)
     }
-
-
 }
