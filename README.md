@@ -3,9 +3,8 @@
 <p align="center">
     <a href="https://opensource.org/licenses/MIT"><img alt="API" src="https://img.shields.io/badge/License-MIT-blue.svg"/></a>
     <img alt="API" src="https://img.shields.io/maven-central/v/io.github.ahmad-hamwi/lazy-pagination-compose"/>
-    <a href="http://kotlinlang.org"><img alt="API" src="https://img.shields.io/badge/kotlin-2.0.0-blue.svg?logo=kotlin"/></a>
+    <a href="http://kotlinlang.org"><img alt="API" src="https://img.shields.io/badge/kotlin-2.1.20-blue.svg?logo=kotlin"/></a>
     <img alt="API" src="https://github.com/Ahmad-Hamwi/lazy-pagination-compose/actions/workflows/unit-test.yml/badge.svg"/>
-    <img alt="API" src="https://github.com/Ahmad-Hamwi/lazy-pagination-compose/actions/workflows/deploy-central.yml/badge.svg"/>
     <br/>
     <br/>
     <img alt="API" src="https://img.shields.io/badge/-Android-gray.svg?style=flat"/>
@@ -186,6 +185,8 @@ PaginatedLazyHorizontalGrid(
     }
 }
 ```
+
+## More supported composables: `PaginatedLazyVerticalGrid` and `PaginatedLazyHorizontalGrid` ##
 
 <details>
     <summary> 
